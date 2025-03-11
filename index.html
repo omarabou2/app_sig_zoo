@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>APP ZOO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <!-- Mapbox -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet" />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/img/icons/Favicon.ico">
+  <!-- Utility classes for CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/@ivteplo/utilities.css@1.0.0/build/main.css">
+  <!-- Custom stylesheet -->
+  <link rel="stylesheet" href="assets/css/bottom-sheet.css">
+  <!-- Script that makes the sheet work -->
+  <script src="assets/js/bottom-sheet.js" defer></script>
+  <!--=============== BOXICONS ===============-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+  <!--=============== CSS ===============-->
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/styles2.css">
+  <!--=============== mapbox-gl-geocoder ===============-->
+  <script
+    src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+  <link rel="stylesheet"
+    href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
+  <script src="assets/js/geocoder.js"></script>
+  <style>
+    #loader {
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      background: #ffffff url('./assets/img/loader/sample.gif') no-repeat center;
+      z-index: 999;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="loader"></div>
+
+
+  <!--=============== HEADER ===============-->
+  <nav class="nav container">
+
+    <div class="nav__menu" id="nav-menu">
+      <ul class="nav__list">
+        <li class="nav__item">
+          <a href="#home" class="nav__link ">
+            <i class='bx bx-home nav__icon'></i>
+            <span class="nav__name">Accueil</span>
+          </a>
+        </li>
+
+        <li class="nav__item">
+          <a href="#about" class="nav__link">
+            <i class='bx bx-purchase-tag-alt nav__icon'></i>
+            <span class="nav__name">Billets</span>
+          </a>
+        </li>
+
+        <li class="nav__item">
+          <a href="#skills" class="nav__link active-link">
+            <i class='bx bx-map-alt nav__icon'></i>
+            <span class="nav__name">Carte</span>
+          </a>
+        </li>
+
+        <li class="nav__item">
+          <a href="#portfolio" class="nav__link">
+            <i class='bx bxs-cat nav__icon'></i>
+            <span class="nav__name">Explorer</span>
+          </a>
+        </li>
+
+        <li class="nav__item">
+          <a href="#contactme" class="nav__link">
+            <i class='bx bx-info-circle nav__icon'></i>
+            <span class="nav__name">À propos</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  </nav>
+
+  <div id="map"></div>
+
+  <!-- The sheet component -->
+  <div id="sheet" class="column items-center justify-end" aria-hidden="true">
+    <!-- Dark background for the sheet -->
+    <div class="overlay"></div>
+
+    <!-- The sheet itself -->
+    <div class="contents column">
+      <!-- Sheet controls -->
+      <header class="controls">
+        <!-- The thing to drag if you want to resize the sheet -->
+        <!-- <div class="draggable-area">
+          <div class="draggable-thumb"></div>
+        </div> -->
+        <!-- Button to close the sheet -->
+        <!-- <button class="close-sheet" type="button" title="Close the sheet">REturn to map</button> -->
+        <a class="close"></a>
+      </header>
+
+      <!-- Body of the sheet -->
+      <main class="body fill column">
+      </main>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script src="https://unpkg.com/three@0.126.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="assets\js\script.js"></script>
+
+  <script>
+
+    var loader;
+
+    function loadNow(opacity) {
+      if (opacity <= 0) {
+        displayContent();
+      } else {
+        loader.style.opacity = opacity;
+        window.setTimeout(function () {
+          loadNow(opacity - 0.05);
+        }, 50);
+      }
+    }
+
+    function displayContent() {
+      loader.style.display = 'none';
+      document.getElementById('map').style.display = 'block';
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      loader = document.getElementById('loader');
+      loadNow(1);
+    });
+  </script>
+
+</body>
+
+</html>
